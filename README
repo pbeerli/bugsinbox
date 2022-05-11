@@ -1,0 +1,9 @@
+Bugs in Box -- an analogy to the coalescent
+[inspired by Joe Felsenstein's verbal 'bugs-in-a-box' analogy]
+
+the Base for the example is a silly ball example from the package pyglet,
+that then morphed into the bugs-in-a-box example.
+
+This work is using the MIT license
+(c) Peter Beerli 2022
+
