@@ -107,7 +107,7 @@ class Population():
     x = 0
     y = 0
     start = False
-    
+
     # init of box
     #
     def __init__(self,window):
@@ -116,12 +116,12 @@ class Population():
         self.x = 100
         self.y = 100
         start = False
-    
+
     # draw the box
     #
     def draw(self):
         draw_rect(self.x,self.y,self.width,self.height)
-    
+
     # update the box
     #
     def update(self,growvalue):
@@ -147,8 +147,8 @@ class Ball(pyglet.sprite.Sprite):
     #
     def __init__(self):
         radius = masterscale * (self.width + self.height)/4
-        x0 = population.x + radius/2 
-        y0 = population.y + radius/2 
+        x0 = population.x + radius/2
+        y0 = population.y + radius/2
         x = x0 + random.random() * (population.width - radius)
         y = y0 + random.random() * (population.height - radius)
         super(Ball, self).__init__(self.ball_image, x, y, batch=balls_batch)
@@ -156,8 +156,8 @@ class Ball(pyglet.sprite.Sprite):
         self.dx,self.dy = rect(500.0,(random.uniform(-pi,pi)),0)
         self.diff = 0.0
         self.rotation = -math.degrees(math.atan2(random.random()-0.5 , random.random()-0.5))
-    
-    
+
+
     # update a bug
     #
     def update(self, dt):
@@ -172,16 +172,16 @@ class Ball(pyglet.sprite.Sprite):
 
             oldx = self.x
             oldy = self.y
-            
+
             self.x += self.dx * dt
             self.y += self.dy * dt
-            
+
             self.x = min(max(self.x, x0), x0 + population.width - radius ) #self.width)
             self.y = min(max(self.y, y0), y0 + population.height - radius ) #self.height)
             self.rotation = -math.degrees(math.atan2(oldy-self.y , oldx-self.x))
         return (self.x,self.y)
-    
-    
+
+
     # turn a bug for chasing
     # DLS
     def turn(self, minAngle, maxAngle):
@@ -209,8 +209,6 @@ class Ball(pyglet.sprite.Sprite):
         #self.width = self.ball_image.width
         #self.height = self.ball_image.height
         self.scale = masterscale
-
-#
 
 # define the windows size, if you want to have a regular window then
 # uncomment the next line and comment out the other one
@@ -334,7 +332,7 @@ def on_key_press(symbol, modifiers):
         chaseMode = False
         procreateMode = False
         didProcreate = False
-                    
+
 
     #DLS
     elif symbol == key.ESCAPE:
@@ -385,26 +383,21 @@ def update(dt):
             if not chaseMode and not procreateMode:
                 id=coalesce(balls,dd,mindistance) #MINDISTANCE*balls[0].scale)
             else:#DLS
-                mindistance = MINDISTANCE*balls[0].scale
                 if len(balls) == 2:
                     if chasing:
                         cycles_since_chasing += 1
                         if cycles_since_chasing == cycles_to_chase:
                             chasing = False
                             balls[0].turn(-0.5*pi, 0.5*pi)
-                    
+
                     if dd[0,1] < mindistance:
                         if procreateMode:
                             didProcreate = True
                             balls.append(Ball())
                             chasing = False
-                            balls[2].scale = 0.4
+                            balls[2].scale = 0.4*masterscale
                             balls[2].x = balls[0].x
                             balls[2].y = balls[0].y
-                            #ball[0].dx = ball[0].dx/2.0
-                            #ball[0].dy = ball[0].dy/2.0
-                            #ball[1].dx = ball[1].dx/2.0
-                            #ball[1].dy = ball[1].dy/2.0
                             c.append(balls[2].update(dt))
                             #c.append(ball)
                             dd=distance(c)
@@ -419,7 +412,7 @@ def update(dt):
                             while dd[0,1] < 1.5*mindistance:
                                 balls[0].update(dt)
                                 dd[0,1] = dd[1,0] = dist(balls[0], balls[1])
-                            
+
                             # begin chasing
                             chasing = True
                             cycles_since_chasing = 0
@@ -563,7 +556,7 @@ label3 = pyglet.text.Label("Time: "+str(0),
                            anchor_x='center')
 helplabel = pyglet.text.Label("",
                               font_size=12,multiline=True,width=800,
-                              x=window.width // 5, y=window.height - window.height // 5, 
+                              x=window.width // 5, y=window.height - window.height // 5,
                               anchor_x='left')
 
 if __name__ == '__main__':
