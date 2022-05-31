@@ -253,6 +253,7 @@ def on_key_press(symbol, modifiers):
     global helper
     global chaseMode      #DLS
     global procreateMode  #DLS
+    global masterscale	# declaring this as global allows bugs to stay same size after reset
     #
     if symbol == key.H:
         if not(helper):
