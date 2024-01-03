@@ -52,6 +52,8 @@ import sys
 #from scipy import *
 from numpy import *
 
+import glfw  ### TRYING TO FIX FOR MACOS 11+
+
 from pyglet.gl import *
 import pyglet
 from pyglet.window import key
@@ -378,6 +380,8 @@ def update(dt):
         c=[]
         for ball in balls:
             c.append(ball.update(dt))
+        for kid in kids:
+            c.append(kid.update(dt))
         if(len(c)>1):
             dd=distance(c)
             mindistance = balls[0].scale * (balls[0].width + balls[0].height)/4.0
@@ -394,15 +398,16 @@ def update(dt):
                     if dd[0,1] < mindistance:
                         if procreateMode:
                             didProcreate = True
-                            balls.append(Ball())
-                            chasing = False
-                            balls[2].scale = 0.4*masterscale
-                            balls[2].x = balls[0].x
-                            balls[2].y = balls[0].y
-                            c.append(balls[2].update(dt))
+                            kid = Ball()
+                            kidPos = len(kids)
+                            kids.append(kid)
+#                            chasing = False
+                            kid.scale = 0.4*masterscale
+                            kid.x = balls[0].x
+                            kid.y = balls[0].y
+                            c.append(kid.update(dt))
                             #c.append(ball)
                             dd=distance(c)
-                            chasing = False
                             return
                         else:
                             balls[0].turn(-0.5*pi, 0.5*pi)
@@ -425,7 +430,7 @@ def update(dt):
                                 ball.dy = ball.dy * 2
                             cycles_to_chase = random.randint(5, 25)
                 if procreateMode and didProcreate:
-                    id = -1
+                    id = -1     # prevent deletion
                 else:
                     id=coalesce(balls,dd,mindistance)
             if id>= 0:
@@ -532,6 +537,7 @@ pyglet.clock.schedule_interval(update, 1/30.)
 
 balls_batch = pyglet.graphics.Batch()
 balls = []
+kids = []
 starttime = time.time()
 timescale=[]
 
