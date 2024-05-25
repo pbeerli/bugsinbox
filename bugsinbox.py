@@ -57,6 +57,7 @@ from pyglet.gl import *
 import pyglet
 from pyglet.window import key
 import time
+import math
 
 # what is my directory?
 currentdir = os.getcwd()
@@ -151,7 +152,7 @@ class Ball(pyglet.sprite.Sprite):
     ball_image = pyglet.resource.image(myimage)
     #ball_image = pyglet.image.load(myimage)
     ball_image.anchor_x = ball_image.width/2
-    ball_image.anchor_y = ball_image.width/2
+    ball_image.anchor_y = ball_image.height/2
     width = ball_image.width
     height = ball_image.height
     # create a bug
