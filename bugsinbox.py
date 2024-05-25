@@ -40,6 +40,7 @@
 # modified by Peter Beerli 2011, 2012, 2013
 # added funny ending by David Swofford 2013
 # added python3 compatibility, Peter Beerli 2020
+# added to know its own directory location
 
 '''Bounces icon (bug) around a window and plays noises when other bugs are met, when bugs come near
     each other one get swallowed, in analogy to the Kingman n-coalescent process. The box on the screen
@@ -58,9 +59,20 @@ from pyglet.gl import *
 import pyglet
 from pyglet.window import key
 import time
+import math
 
+# what is my directory?
+currentdir = os.getcwd()
+# where is the source directory
+mydir = os.path.dirname(os.path.abspath(__file__))
+# changing to the source directory so that bugsinbox can find the images if it is not started from the source directory
+os.chdir(mydir)
 imagelist = ['king_beetle_transp.png', 'ladybug_transp.png', 'mexican_bean_beetle_transp.png','mouselemur.png']
-
+#print(currentdir)
+#print(mydir)
+#print(os.getcwd())
+#print(imagelist)
+#sys.exit()
 #'tigerbeetle2.png']
 
 
@@ -142,7 +154,7 @@ class Ball(pyglet.sprite.Sprite):
     ball_image = pyglet.resource.image(myimage)
     #ball_image = pyglet.image.load(myimage)
     ball_image.anchor_x = ball_image.width/2
-    ball_image.anchor_y = ball_image.width/2
+    ball_image.anchor_y = ball_image.height/2
     width = ball_image.width
     height = ball_image.height
     # create a bug
