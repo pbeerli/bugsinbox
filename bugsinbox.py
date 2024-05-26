@@ -50,13 +50,10 @@
 import os
 import random
 import sys
-#from scipy import *
 from numpy import *
 
-import glfw  ### TRYING TO FIX FOR MACOS 11+
-
-from pyglet.gl import *
 import pyglet
+from pyglet.gl import *
 from pyglet.window import key
 import time
 import math
@@ -396,10 +393,10 @@ def update(dt):
             c.append(kid.update(dt))
         if(len(c)>1):
             dd=distance(c)
-            mindistance = balls[0].scale * (balls[0].width + balls[0].height)/4.0
+            mindistance = balls[0].scale * (balls[0].width + balls[0].height)/2.0
             if not chaseMode and not procreateMode:
                 id=coalesce(balls,dd,mindistance) #MINDISTANCE*balls[0].scale)
-            else:#DLS
+            else:
                 if len(balls) == 2:
                     if chasing:
                         cycles_since_chasing += 1
@@ -411,15 +408,14 @@ def update(dt):
                         if procreateMode:
                             didProcreate = True
                             kid = Ball()
-                            kidPos = len(kids)
                             kids.append(kid)
-#                            chasing = False
+                            chasing = False
                             kid.scale = 0.4*masterscale
                             kid.x = balls[0].x
                             kid.y = balls[0].y
                             c.append(kid.update(dt))
-                            #c.append(ball)
                             dd=distance(c)
+                            time.sleep(0.2)
                             return
                         else:
                             balls[0].turn(-0.5*pi, 0.5*pi)
