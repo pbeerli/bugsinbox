@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # Bugs in a Box — pyglet ≥ 2.0, macOS-safe (no immediate-mode GL)
 # All-in-one rewrite: robust fullscreen, resize-friendly, optimized UI (2025)
-
+# MIT license
+# (c) Peter Beerli 2025, October with help of chatgpt5
+#
 import os, random, sys, time, math
 import numpy as np
 import pyglet
