@@ -224,7 +224,7 @@ class Ball(pyglet.sprite.Sprite):
 # define the windows size, if you want to have a regular window then
 # uncomment the next line and comment out the other one
 #window = pyglet.window.Window(800, 600)
-window = pyglet.window.Window(fullscreen=True)
+window = pyglet.window.Window(fullscreen=False)
 population = Population(window)
 
 #

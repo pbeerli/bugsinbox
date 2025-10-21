@@ -1,17 +1,13 @@
 import pyglet
-# import all of opengl functions
-from pyglet.gl import *
-import pyglet.gl as gl
 
-win = pyglet.window.Window()
+window = pyglet.window.Window()
+label = pyglet.text.Label('Hello, world!', font_size=36,
+                                       x=window.width // 2,  y=window.height // 2,
+                                       anchor_x='center', anchor_y='center')
 
-@win.event
+@window.event
 def on_draw():
-    # create a line context
-    gl.glBegin(GL_LINES)
-    # create a line, x,y,z
-    glVertex3f(100.0,100.0,0.25)
-    glVertex3f(200.0,300.0,-0.75)
-    glEnd()
+    window.clear()
+    label.draw()
 
 pyglet.app.run()

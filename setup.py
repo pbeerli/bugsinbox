@@ -10,7 +10,7 @@ from setuptools import setup
 APP = ['bugsinbox.py']
 DATA_FILES = ['bullet.wav', 'king_beetle_transp.png', 'ladybug_transp.png', 'mexican_bean_beetle_transp.png', 'mouselemur.png','tigerbeetle2.png']
 OPTIONS = {
-    'iconfile': '/Users/beerli/Sources/python-snippets/bugbox2020/bugsinbox/bugsinbox.icns',
+    'iconfile': '/Users/beerli/Sources/python-snippets/showcases/bugsinbox/bugsinbox.icns',
     'plist': {'CFBundleShortVersionString':'0.1.0',}}
 
 
